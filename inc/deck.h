@@ -2,6 +2,7 @@
 # define DECK_H
 
 # include <stddef.h>
+# include <stdbool.h>
 
 typedef enum Suit
 {
@@ -29,6 +30,7 @@ typedef struct s_card
 {
 	e_suit	suit;
 	e_rank	rank;
+	bool	shuffle;
 }	t_card;
 
 typedef struct s_deck
@@ -38,6 +40,7 @@ typedef struct s_deck
 	size_t	size;
 }	t_deck;
 
-t_deck	deck_create(void);
+t_deck	*deck_create(void);
+void	deck_shuffle(t_deck *deck);
 
 #endif
