@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include <time.h>
 #include "deck.h"
+#include "play.h"
 
 int	main(void)
 {
@@ -8,7 +8,6 @@ int	main(void)
 
 	deck = deck_create();
 	deck_shuffle(deck);
-	for (int i = 0; i < 40; i++)
-		printf("suit:%d - rank:%d\n", deck->cards[i].suit, deck->cards[i].rank);
+	play(deck);
 	return (0);
 }

@@ -38,9 +38,12 @@ typedef struct s_deck
 	t_card	cards[40];
 	size_t	counter;
 	size_t	size;
+	char	*suits[4];
+	char	*ranks[10];
 }	t_deck;
 
 t_deck	*deck_create(void);
+void	array_create(t_deck *deck);
 void	deck_shuffle(t_deck *deck);
 
 #endif

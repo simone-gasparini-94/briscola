@@ -20,7 +20,27 @@ t_deck	*deck_create(void)
 		deck->cards[i].shuffle = false;
 		i++;
 	}
+	array_create(deck);
 	return (deck);
+}
+
+void	array_create(t_deck *deck)
+{
+	deck->suits[0] = "COINS";
+	deck->suits[1] = "SWORDS";
+	deck->suits[2] = "CUPS";
+	deck->suits[3] = "BATONS";
+	deck->ranks[0] = "TWO";
+	deck->ranks[1] = "FOUR";
+	deck->ranks[1] = "FOUR";
+	deck->ranks[2] = "FIVE";
+	deck->ranks[3] = "SIX";
+	deck->ranks[4] = "SEVEN";
+	deck->ranks[5] = "JACK";
+	deck->ranks[6] = "KNIGHT";
+	deck->ranks[7] = "KING";
+	deck->ranks[8] = "THREE";
+	deck->ranks[9] = "ACE";
 }
 
 void	deck_shuffle(t_deck *deck)
