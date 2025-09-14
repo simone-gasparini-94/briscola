@@ -1,15 +1,17 @@
 #ifndef DECK_H
 # define DECK_H
 
-enum e_suit
+# include <stddef.h>
+
+typedef enum Suit
 {
 	COINS,
 	SWORDS,
 	CUPS,
 	BATONS
-};
+}	e_suit;
 
-enum e_rank
+typedef enum Rank
 {
 	TWO,
 	FOUR,
@@ -21,16 +23,21 @@ enum e_rank
 	KING,
 	THREE,
 	ACE
-};
+}	e_rank;
 
 typedef struct s_card
 {
-	enum e_suit;
-	enum e_rank;
+	e_suit	suit;
+	e_rank	rank;
 }	t_card;
 
 typedef struct s_deck
 {
-	t_card cards[40];
-	uint counter;
+	t_card	cards[40];
+	size_t	counter;
+	size_t	size;
 }	t_deck;
+
+t_deck	deck_create(void);
+
+#endif

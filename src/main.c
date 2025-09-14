@@ -5,6 +5,6 @@ int	main(void)
 {
 	t_deck deck;
 
-	deck = create_deck();
+	deck = deck_create();
 	return (0);
 }
