@@ -1,14 +1,30 @@
 #include "deck.h"
+#include "player.h"
 #include <stdio.h>
 
-void	play(t_deck *deck)
+static void draw(t_player *player, t_deck *deck, size_t i);
+
+void	play(t_deck *deck, t_player *player1, t_player *player2)
 {
-	printf("Hand:\n");
-	while (deck->counter < 3)
+	size_t	i;
+
+	i = 0;
+	while (i < 3)
 	{
-		printf("%s %s\n",
-			deck->ranks[deck->cards[deck->counter].rank],
-			deck->suits[deck->cards[deck->counter].suit]);
-		deck->counter++;
+		draw(player1, deck, i);
+		draw(player2, deck, i);
+		i++;
 	}
+	i = 0;
+	while (i < 3)
+	{
+		printf("%s %s\n", deck->ranks[player1->hand[i].rank],
+				deck->suits[player1->hand[i].suit]);
+		i++;
+	}
+}
+
+static void	draw(t_player *player, t_deck *deck, size_t i)
+{
+	player->hand[i] = deck->cards[deck->counter++];
 }
