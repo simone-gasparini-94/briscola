@@ -6,9 +6,10 @@
 typedef struct s_player
 {
 	t_card	hand[3];
+	char	*name;
 	size_t	points;
 }	t_player;
 
-t_player *player_create(void);
+t_player *player_create(char *name);
 
 #endif
