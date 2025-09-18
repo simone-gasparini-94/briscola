@@ -1,6 +1,7 @@
 #ifndef PLAYER_H
 # define PLAYER_H
 
+# include <stdbool.h>
 # include "deck.h"
 
 typedef struct s_player
@@ -9,6 +10,7 @@ typedef struct s_player
 	char	*name;
 	size_t	points;
 	size_t	index_played;
+	bool	dealer;
 }	t_player;
 
 t_player *player_create(char *name);
