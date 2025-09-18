@@ -4,13 +4,16 @@
 # include <stdbool.h>
 # include "deck.h"
 
+# define HAND_SIZE 3
+
 typedef struct s_player
 {
-	t_card	hand[3];
+	t_card	*hand;
 	t_card	played;
 	char	*name;
 	size_t	points;
 	size_t	index;
+	size_t	hand_size;
 	bool	dealer;
 	bool	first;
 }	t_player;

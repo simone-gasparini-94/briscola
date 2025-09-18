@@ -2,6 +2,7 @@
 #include "deck.h"
 #include "play.h"
 #include "player.h"
+#include "print.h"
 
 int	main(void)
 {
@@ -14,5 +15,6 @@ int	main(void)
 	deck = deck_create();
 	deck_shuffle(deck);
 	play(deck, player1, player2);
+	print_score(player1, player2);
 	return (0);
 }

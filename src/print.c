@@ -8,7 +8,7 @@ void	print_hand(t_deck *deck, t_player *player)
 
 	printf("HAND:		");
 	i = 0;
-	while (i < 3)
+	while (i < player->hand_size)
 	{
 		printf("%zu: %s %s\n		", i, deck->ranks[player->hand[i].rank],
 				deck->suits[player->hand[i].suit]);
@@ -27,4 +27,14 @@ void	print_briscola(t_deck *deck)
 {
 	printf("BRISCOLA:	%s %s\n\n", deck->ranks[deck->briscola.rank],
 			deck->suits[deck->briscola.suit]);
+}
+
+void	print_score(t_player *player1, t_player *player2)
+{
+	if (player1->points > player2->points)
+		printf("%s WON WITH %zu POINTS\n\n", player1->name, player1->points);
+	else if (player2->points > player1->points)
+		printf("%s WON WITH %zu POINTS\n\n", player2->name, player2->points);
+	else
+		printf("DRAW\n\n");
 }
