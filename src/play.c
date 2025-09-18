@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "deck.h"
 #include "player.h"
 #include "print.h"
@@ -13,6 +15,7 @@ void	play(t_deck *deck, t_player *player1, t_player *player2)
 	draw_initial(deck, player1, player2);
 	turn_briscola(deck);
 	play_card(deck, player1);
+	play_card(deck, player2);
 }
 
 static void draw_initial(t_deck *deck, t_player *player1, t_player *player2)
@@ -39,8 +42,15 @@ static void	play_card(t_deck *deck, t_player *player)
 {
 	size_t	i;
 
-	printf("\nPLAY A CARD:	");
-	scanf("%zu", &i);
+	if (strncmp(player->name, "PLAYER2", strlen(player->name)) == 0)
+	{
+		i = rand() % 3;
+	}
+	else
+	{
+		printf("\nPLAY A CARD:	");
+		scanf("%zu", &i);
+	}
 	printf("\n%s PLAYED:	", player->name);
 	print_card(deck, player, i);
 	player->index_played = i;
