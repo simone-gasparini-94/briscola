@@ -11,6 +11,8 @@ static void draw_initial(t_deck *deck, t_player *player1, t_player *player2);
 static void draw(t_player *player, t_deck *deck, size_t i);
 static void turn_briscola(t_deck *deck);
 static void play_card(t_deck *deck, t_player *player);
+static void	check_winner(t_deck *deck, t_player *player1, t_player *player2);
+static void	gets_hand(t_deck *deck, t_player *winner, t_player *loser);
 
 void	play(t_deck *deck, t_player *player1, t_player *player2)
 {
@@ -27,7 +29,44 @@ void	play(t_deck *deck, t_player *player1, t_player *player2)
 		play_card(deck, player1);
 		play_card(deck, player2);
 	}
+	check_winner(deck, player1, player2);
 }
+
+static void check_winner(t_deck *deck, t_player *player1, t_player *player2)
+{
+	if (player1->played.suit == player2->played.suit)
+	{
+		if (player1->hand[player1->index].rank
+				> player2->hand[player2->index].rank)
+			gets_hand(deck, player1, player2);
+		else
+			gets_hand(deck, player2, player1);
+	}
+	else
+	{
+		if (player1->played.suit == deck->briscola.suit)
+			gets_hand(deck, player1, player2);
+		else if (player2->played.suit == deck->briscola.suit)
+			gets_hand(deck, player2, player1);
+		else
+		{
+			if (player1->first == true)
+				gets_hand(deck, player1, player2);
+			else
+				gets_hand(deck, player2, player1);
+		}
+	}
+}
+
+static void	gets_hand(t_deck *deck, t_player *winner, t_player *loser)
+{
+	winner->first = true;
+	loser->first = false;
+	winner->points += deck->values[winner->played.rank];
+	loser->points += deck->values[loser->played.rank];
+	printf("%s TAKES\n\n", winner->name);
+}
+
 
 static void	pick_dealer(t_player *player1, t_player *player2)
 {
@@ -39,6 +78,8 @@ static void	pick_dealer(t_player *player1, t_player *player2)
 	{
 		player1->dealer = true;
 		player2->dealer = false;
+		player1->first = false;
+		player2->first = true;
 		printf("%s IS THE DEALER\n\n", player1->name);
 		printf("%s STARTS\n\n", player2->name);
 	}
@@ -46,6 +87,8 @@ static void	pick_dealer(t_player *player1, t_player *player2)
 	{
 		player1->dealer = false;
 		player2->dealer = true;
+		player1->first = true;
+		player2->first = false;
 		printf("%s IS THE DEALER\n\n", player2->name);
 		printf("%s STARTS\n\n", player1->name);
 	}
@@ -87,7 +130,8 @@ static void	play_card(t_deck *deck, t_player *player)
 	}
 	printf("%s PLAYED:	", player->name);
 	print_card(deck, player, i);
-	player->index_played = i;
+	player->index = i;
+	player->played = player->hand[player->index];
 }
 
 static void	draw(t_player *player, t_deck *deck, size_t i)

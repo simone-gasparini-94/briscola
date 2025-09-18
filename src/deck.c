@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <time.h>
 
+static void	array_str_create(t_deck *deck);
+static void array_values_create(t_deck *deck);
+
 t_deck	*deck_create(void)
 {
 	t_deck *deck;
@@ -10,28 +13,28 @@ t_deck	*deck_create(void)
 	deck = malloc(sizeof(*deck));
 	if (deck == NULL)
 		return (NULL);
-	deck->size = 40;
+	deck->size = NUM_CARDS;
 	deck->counter = 0;
 	i = 0;
 	while (i < deck->size)
 	{
-		deck->cards[i].suit = i / 10;
-		deck->cards[i].rank = i % 10;
+		deck->cards[i].suit = i / NUM_RANKS;
+		deck->cards[i].rank = i % NUM_RANKS;
 		deck->cards[i].shuffle = false;
 		i++;
 	}
-	array_create(deck);
+	array_str_create(deck);
+	array_values_create(deck);
 	return (deck);
 }
 
-void	array_create(t_deck *deck)
+static void	array_str_create(t_deck *deck)
 {
 	deck->suits[0] = "COINS";
 	deck->suits[1] = "SWORDS";
 	deck->suits[2] = "CUPS";
 	deck->suits[3] = "BATONS";
 	deck->ranks[0] = "TWO";
-	deck->ranks[1] = "FOUR";
 	deck->ranks[1] = "FOUR";
 	deck->ranks[2] = "FIVE";
 	deck->ranks[3] = "SIX";
@@ -43,19 +46,33 @@ void	array_create(t_deck *deck)
 	deck->ranks[9] = "ACE";
 }
 
+static void array_values_create(t_deck *deck)
+{
+	deck->values[0] = 0;
+	deck->values[1] = 0;
+	deck->values[2] = 0;
+	deck->values[3] = 0;
+	deck->values[4] = 0;
+	deck->values[5] = 2;
+	deck->values[6] = 3;
+	deck->values[7] = 4;
+	deck->values[8] = 10;
+	deck->values[9] = 11;
+}
+
 void	deck_shuffle(t_deck *deck)
 {
-	t_card	deck_shuffle[40];
+	t_card	deck_shuffle[NUM_CARDS];
 	size_t	i;
 	size_t	random_value;
 
 	srand(time(NULL));
-	random_value = rand() % 40;
+	random_value = rand() % NUM_CARDS;
 	i = 0;
 	while (i < deck->size)
 	{
 		while (deck->cards[random_value].shuffle == true)
-			random_value = rand() % 40;
+			random_value = rand() % NUM_CARDS;
 		deck_shuffle[i] = deck->cards[random_value];
 		deck->cards[random_value].shuffle = true;
 		i++;

@@ -4,6 +4,10 @@
 # include <stddef.h>
 # include <stdbool.h>
 
+# define NUM_CARDS 40
+# define NUM_SUITS 4
+# define NUM_RANKS 10
+
 typedef enum Suit
 {
 	COINS,
@@ -35,16 +39,16 @@ typedef struct s_card
 
 typedef struct s_deck
 {
-	t_card		cards[40];
+	t_card		cards[NUM_CARDS];
 	t_card		briscola;
-	char		*ranks[10];
-	char		*suits[4];
+	char		*ranks[NUM_RANKS];
+	char		*suits[NUM_SUITS];
+	size_t		values[NUM_RANKS];
 	size_t		counter;
 	size_t		size;
 }	t_deck;
 
 t_deck	*deck_create(void);
-void	array_create(t_deck *deck);
 void	deck_shuffle(t_deck *deck);
 
 #endif
