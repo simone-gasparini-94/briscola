@@ -161,17 +161,32 @@ static void turn_briscola(t_deck *deck)
 
 static void	play_card(t_deck *deck, t_player *player)
 {
-	size_t	i;
 
+	int		i;
+	char	new_line;
+
+	new_line = '\n';
 	if (strncmp(player->name, "PLAYER2", strlen(player->name)) == 0)
 	{
 		i = rand() % 3;
 	}
 	else
 	{
-		printf("PLAY A CARD:	");
-		scanf("%zu", &i);
-		printf("\n");
+		while (1)
+		{
+			printf("PLAY A CARD:	");
+			i = getchar() - '0';
+			while (1)
+			{
+				if (new_line == getchar())
+					break ;
+			}
+			printf("\n");
+			if (i >= 0 && i <= (int) player->hand_size - 1)
+				break ;
+			printf("ERROR: SELECT A NUMBER BETWEEN 0 AND %zu\n\n",
+					player->hand_size - 1);
+		}
 	}
 	printf("%s PLAYED:	", player->name);
 	print_card(deck, player, i);
