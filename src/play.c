@@ -16,20 +16,30 @@ static void	gets_hand(t_deck *deck, t_player *winner, t_player *loser);
 
 void	play(t_deck *deck, t_player *player1, t_player *player2)
 {
+	t_player *first;
+	t_player *second;
 	pick_dealer(player1, player2);
 	draw_initial(deck, player1, player2);
 	turn_briscola(deck);
-	if (player1->dealer == true)
+	while (deck->counter < deck->size)
 	{
-		play_card(deck, player2);
-		play_card(deck, player1);
+		if (player1->first == true)
+		{
+			first = player1;
+			second = player2;
+		}
+		else
+		{
+			first = player2;
+			second = player1;
+		}
+		play_card(deck, first);
+		play_card(deck, second);
+		check_winner(deck, player1, player2);
+		draw(first, deck, first->index);
+		draw(second, deck, second->index);
+		print_hand(deck, player1);
 	}
-	else
-	{
-		play_card(deck, player1);
-		play_card(deck, player2);
-	}
-	check_winner(deck, player1, player2);
 }
 
 static void check_winner(t_deck *deck, t_player *player1, t_player *player2)
@@ -110,7 +120,7 @@ static void draw_initial(t_deck *deck, t_player *player1, t_player *player2)
 
 static void turn_briscola(t_deck *deck)
 {
-	deck->briscola = deck->cards[deck->counter++];
+	deck->briscola = deck->cards[deck->size - 1];
 	print_briscola(deck);
 }
 
