@@ -1,0 +1,123 @@
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/types.h>
+#include "player.h"
+
+#ifndef BUF_LEN
+# define BUF_LEN 8
+#endif
+
+static char	*get_next_line(void);
+static char *append_to_str(char *first, char *second);
+static char	*get_line(char *str);
+
+size_t	get_input(t_player *player)
+{
+	char 	*line;
+	size_t	i;
+
+	while (1)
+	{
+		printf("PLAY A CARD:\n\n");
+		line = get_next_line();
+		printf("line is %s\n", line);
+		if (strncmp(line, "EXIT", strlen("EXIT")) == 0)
+		{
+			free(line);
+			exit(EXIT_SUCCESS);
+		}
+		i = atoi(line);
+		printf("number is %zu\n", i);
+		free(line);
+		if (i >= 0 && i <= player->hand_size - 1)
+			break ;
+		printf("ERROR: SELECT A NUMBER BETWEEN 0 AND %zu\n\n",
+				player->hand_size - 1);
+	}
+	return (i);
+}
+
+static char	*get_next_line(void)
+{
+	static char	*buf;
+	char		*tmp;
+	char		*new_line;
+	char		b[BUF_LEN + 1];
+	int			num_read;
+
+	if (buf == NULL)
+	{
+		buf = calloc(1, 1);
+		if (buf == NULL)
+			return (NULL);
+	}
+	while ((tmp = strchr(buf, '\n')) == NULL)
+	{
+		num_read = read(STDIN_FILENO, b, BUF_LEN);
+		if (num_read == -1)
+		{
+			perror("read");
+			if (buf != NULL)
+				free(buf);
+			return (NULL);
+		}
+		if (num_read == 0)
+			break ;
+		b[num_read] = '\0';
+		buf = append_to_str(buf, b);
+	}
+	new_line = get_line(buf);
+	if (tmp == NULL)
+	{
+		free(buf);
+		buf = NULL;
+	}
+	else
+	{
+		free(buf);
+		buf = strdup(&tmp[1]);
+	}
+	return (new_line);
+}
+
+static char *append_to_str(char *first, char *second)
+{
+	char	*new;
+	size_t	len_new;
+	size_t	len_first;
+	size_t	len_second;
+
+	len_first = strlen(first);
+	len_second = strlen(second);
+	len_new = len_first + len_second;
+	new = malloc(len_new + 1);
+	if (new == NULL)
+		return (NULL);
+	strcpy(new, first);
+	free(first);
+	strcat(new, second);
+	return (new);
+}
+
+static char	*get_line(char *str)
+{
+	char	*line;
+	size_t	len;
+	
+	if (str[0] == '\0')
+		return (NULL);
+	len = 0;
+	while (str[len] != '\n' && str[len] != '\0')
+		len++;
+	if (str[len] == '\n')
+		len++;
+	line = malloc(len + 1);
+	if (line == NULL)
+		return (NULL);
+	memcpy(line, str, len);
+	line[len] = '\0';
+	return (line);
+}
+

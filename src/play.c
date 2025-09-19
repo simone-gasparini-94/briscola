@@ -6,6 +6,7 @@
 #include "play.h"
 #include "player.h"
 #include "print.h"
+#include "get_input.h"
 #include "set_up.h"
 
 static void play_card(t_deck *deck, t_player *player);
@@ -58,32 +59,12 @@ void	draw(t_player *player, t_deck *deck, size_t i)
 static void	play_card(t_deck *deck, t_player *player)
 {
 
-	int		i;
-	char	new_line;
+	size_t	i;
 
-	new_line = '\n';
 	if (strncmp(player->name, "PLAYER2", strlen(player->name)) == 0)
-	{
 		i = rand() % 3;
-	}
 	else
-	{
-		while (1)
-		{
-			printf("PLAY A CARD:	");
-			i = getchar() - '0';
-			while (1)
-			{
-				if (new_line == getchar())
-					break ;
-			}
-			printf("\n");
-			if (i >= 0 && i <= (int) player->hand_size - 1)
-				break ;
-			printf("ERROR: SELECT A NUMBER BETWEEN 0 AND %zu\n\n",
-					player->hand_size - 1);
-		}
-	}
+		i = get_input(player);
 	printf("%s PLAYED:	", player->name);
 	print_card(deck, player, i);
 	player->index = i;
