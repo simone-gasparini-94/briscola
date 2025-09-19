@@ -5,7 +5,7 @@
 static void	array_str_create(t_deck *deck);
 static void array_values_create(t_deck *deck);
 
-t_deck	*deck_create(void)
+t_deck	*deck_create(t_player *player1, t_player *player2)
 {
 	t_deck *deck;
 	size_t	i;
@@ -13,6 +13,8 @@ t_deck	*deck_create(void)
 	deck = malloc(sizeof(*deck));
 	if (deck == NULL)
 		return (NULL);
+	deck->player1 = player1;
+	deck->player2 = player2;
 	deck->size = NUM_CARDS;
 	deck->counter = 0;
 	i = 0;

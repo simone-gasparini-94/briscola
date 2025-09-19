@@ -8,6 +8,8 @@
 # define NUM_SUITS 4
 # define NUM_RANKS 10
 
+typedef struct s_player t_player;
+
 typedef enum Suit
 {
 	COINS,
@@ -39,6 +41,8 @@ typedef struct s_card
 
 typedef struct s_deck
 {
+	t_player	*player1;
+	t_player	*player2;
 	t_card		cards[NUM_CARDS];
 	t_card		briscola;
 	char		*ranks[NUM_RANKS];
@@ -48,7 +52,7 @@ typedef struct s_deck
 	size_t		size;
 }	t_deck;
 
-t_deck	*deck_create(void);
+t_deck	*deck_create(t_player *player1, t_player *player2);
 void	deck_shuffle(t_deck *deck);
 
 #endif

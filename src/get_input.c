@@ -4,6 +4,7 @@
 #include <string.h>
 #include <sys/types.h>
 #include "player.h"
+#include "deck.h"
 
 #ifndef BUF_LEN
 # define BUF_LEN 8
@@ -13,18 +14,22 @@ static char	*get_next_line(void);
 static char *append_to_str(char *first, char *second);
 static char	*get_line(char *str);
 
-size_t	get_input(t_player *player)
+size_t	get_input(t_player *player, t_deck *deck)
 {
 	char 	*line;
 	size_t	i;
 
 	while (1)
 	{
-		printf("PLAY A CARD:\n\n");
+		printf("PLAY A CARD:	");
+		fflush(stdout);
 		line = get_next_line();
+		printf("\n");
 		if (strncmp(line, "EXIT", strlen("EXIT")) == 0)
 		{
 			free(line);
+			free(deck->player1->hand);
+			free(deck->player2->hand);
 			exit(EXIT_SUCCESS);
 		}
 		i = atoi(line) - 1;

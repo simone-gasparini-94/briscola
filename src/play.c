@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include "deck.h"
 #include "play.h"
 #include "player.h"
@@ -35,6 +36,7 @@ void	play(t_deck *deck, t_player *player1, t_player *player2)
 		play_card(deck, first);
 		play_card(deck, second);
 		check_winner(deck, player1, player2);
+		print_divider();
 		print_briscola(deck);
 		draw(first, deck, first->index);
 		draw(second, deck, second->index);
@@ -45,6 +47,8 @@ void	play(t_deck *deck, t_player *player1, t_player *player2)
 		play_card(deck, first);
 		play_card(deck, second);
 		check_winner(deck, player1, player2);
+		print_divider();
+		print_briscola(deck);
 		first->hand = update_hand(first);	
 		second->hand = update_hand(second);
 		print_hand(deck, player1);
@@ -64,7 +68,7 @@ static void	play_card(t_deck *deck, t_player *player)
 	if (strncmp(player->name, "PLAYER2", strlen(player->name)) == 0)
 		i = rand() % 3;
 	else
-		i = get_input(player);
+		i = get_input(player, deck);
 	printf("%s PLAYED:	", player->name);
 	print_card(deck, player, i);
 	player->index = i;

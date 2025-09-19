@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <sys/ioctl.h>
+#include <unistd.h>
 #include "deck.h"
 #include "player.h"
 
@@ -37,4 +39,24 @@ void	print_score(t_player *player1, t_player *player2)
 		printf("%s WON WITH %zu POINTS\n\n", player2->name, player2->points);
 	else
 		printf("DRAW\n\n");
+}
+
+void	print_divider(void)
+{
+	struct winsize w;
+	size_t	i;
+
+	if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &w) == -1)
+	{
+		perror("ioctl");
+		return ;
+	}
+	i = 0;
+	while (i++ < w.ws_col)
+	{
+		putchar('*');
+		fflush(stdout);
+		usleep(4000);
+	}
+	printf("\n\n");
 }
