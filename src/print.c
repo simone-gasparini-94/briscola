@@ -10,7 +10,7 @@ void	print_hand(t_deck *deck, t_player *player)
 	i = 0;
 	while (i < player->hand_size)
 	{
-		printf("%zu: %s %s\n		", i, deck->ranks[player->hand[i].rank],
+		printf("%zu: %s %s\n		", i + 1, deck->ranks[player->hand[i].rank],
 				deck->suits[player->hand[i].suit]);
 		i++;
 	}
@@ -19,7 +19,7 @@ void	print_hand(t_deck *deck, t_player *player)
 
 void	print_card(t_deck *deck, t_player *player, size_t i)
 {
-	printf("%zu: %s %s\n\n", i, deck->ranks[player->hand[i].rank],
+	printf("%zu: %s %s\n\n", i + 1, deck->ranks[player->hand[i].rank],
 			deck->suits[player->hand[i].suit]);
 }
 

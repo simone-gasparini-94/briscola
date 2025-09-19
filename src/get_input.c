@@ -22,19 +22,17 @@ size_t	get_input(t_player *player)
 	{
 		printf("PLAY A CARD:\n\n");
 		line = get_next_line();
-		printf("line is %s\n", line);
 		if (strncmp(line, "EXIT", strlen("EXIT")) == 0)
 		{
 			free(line);
 			exit(EXIT_SUCCESS);
 		}
-		i = atoi(line);
-		printf("number is %zu\n", i);
+		i = atoi(line) - 1;
 		free(line);
 		if (i >= 0 && i <= player->hand_size - 1)
 			break ;
-		printf("ERROR: SELECT A NUMBER BETWEEN 0 AND %zu\n\n",
-				player->hand_size - 1);
+		printf("SELECT A NUMBER BETWEEN 1 AND %zu\n\n",
+				player->hand_size);
 	}
 	return (i);
 }
