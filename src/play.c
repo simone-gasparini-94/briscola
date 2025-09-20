@@ -38,6 +38,16 @@ void	play(t_deck *deck, t_player *player1, t_player *player2)
 		check_winner(deck, player1, player2);
 		print_divider();
 		print_briscola(deck);
+		if (player1->first == true)
+		{
+			first = player1;
+			second = player2;
+		}
+		else
+		{
+			first = player2;
+			second = player1;
+		}
 		draw(first, deck, first->index);
 		draw(second, deck, second->index);
 		print_hand(deck, player1);
@@ -47,6 +57,16 @@ void	play(t_deck *deck, t_player *player1, t_player *player2)
 		play_card(deck, first);
 		play_card(deck, second);
 		check_winner(deck, player1, player2);
+		if (player1->first == true)
+		{
+			first = player1;
+			second = player2;
+		}
+		else
+		{
+			first = player2;
+			second = player1;
+		}
 		print_divider();
 		print_briscola(deck);
 		first->hand = update_hand(first);	
