@@ -43,6 +43,8 @@ typedef struct s_deck
 {
 	t_player	*player1;
 	t_player	*player2;
+	t_player	*first;
+	t_player	*second;
 	t_card		cards[NUM_CARDS];
 	t_card		briscola;
 	char		*ranks[NUM_RANKS];

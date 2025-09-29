@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include "computer.h"
 #include "deck.h"
 #include "play.h"
 #include "player.h"
@@ -17,60 +18,57 @@ static t_card *update_hand(t_player *player);
 
 void	play(t_deck *deck, t_player *player1, t_player *player2)
 {
-	t_player 	*first;
-	t_player 	*second;
-
 	set_up(deck, player1, player2);
 	while (deck->counter < deck->size)
 	{
 		if (player1->first == true)
 		{
-			first = player1;
-			second = player2;
+			deck->first = player1;
+			deck->second = player2;
 		}
 		else
 		{
-			first = player2;
-			second = player1;
+			deck->first = player2;
+			deck->second = player1;
 		}
-		play_card(deck, first);
-		play_card(deck, second);
+		play_card(deck, deck->first);
+		play_card(deck, deck->second);
 		check_winner(deck, player1, player2);
 		print_divider();
 		print_briscola(deck);
 		if (player1->first == true)
 		{
-			first = player1;
-			second = player2;
+			deck->first = player1;
+			deck->second = player2;
 		}
 		else
 		{
-			first = player2;
-			second = player1;
+			deck->first = player2;
+			deck->second = player1;
 		}
-		draw(first, deck, first->index);
-		draw(second, deck, second->index);
+		draw(deck->first, deck, deck->first->index);
+		draw(deck->second, deck, deck->second->index);
 		print_hand(deck, player1);
 	}
-	while (first->hand_size > 0)
+	while (deck->first->hand_size > 0)
 	{
-		play_card(deck, first);
-		play_card(deck, second);
+		play_card(deck, deck->first);
+		play_card(deck, deck->second);
 		check_winner(deck, player1, player2);
 		if (player1->first == true)
 		{
-			first = player1;
-			second = player2;
+			deck->first = player1;
+			deck->second = player2;
 		}
 		else
 		{
-			first = player2;
-			second = player1;
+			deck->first = player2;
+			deck->second = player1;
 		}
 		print_divider();
 		print_briscola(deck);
-		first->hand = update_hand(first);	
-		second->hand = update_hand(second);
+		deck->first->hand = update_hand(deck->first);	
+		deck->second->hand = update_hand(deck->second);
 		print_hand(deck, player1);
 	}
 }
@@ -86,7 +84,7 @@ static void	play_card(t_deck *deck, t_player *player)
 	size_t	i;
 
 	if (strncmp(player->name, "PLAYER2", strlen(player->name)) == 0)
-		i = rand() % 3;
+		i = handle_computer_choice(deck);
 	else
 		i = get_input(player, deck);
 	printf("%s PLAYED:	", player->name);
