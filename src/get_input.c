@@ -13,6 +13,7 @@
 static char	*get_next_line(void);
 static char *append_to_str(char *first, char *second);
 static char	*get_line(char *str);
+static char	*update_buffer(char *buffer);
 
 size_t	get_input(t_player *player, t_deck *deck)
 {
@@ -34,7 +35,7 @@ size_t	get_input(t_player *player, t_deck *deck)
 		}
 		i = atoi(line) - 1;
 		free(line);
-		if (i >= 0 && i <= player->hand_size - 1)
+		if (i <= player->hand_size - 1)
 			break ;
 		printf("SELECT A NUMBER BETWEEN 1 AND %zu\n\n",
 				player->hand_size);
@@ -72,16 +73,7 @@ static char	*get_next_line(void)
 		buf = append_to_str(buf, b);
 	}
 	new_line = get_line(buf);
-	if (tmp == NULL)
-	{
-		free(buf);
-		buf = NULL;
-	}
-	else
-	{
-		free(buf);
-		buf = strdup(&tmp[1]);
-	}
+	buf = update_buffer(buf);
 	return (new_line);
 }
 
@@ -124,3 +116,22 @@ static char	*get_line(char *str)
 	return (line);
 }
 
+static char	*update_buffer(char *buffer)
+{
+	char	*new;
+	size_t	len;
+
+	if (buffer == NULL)
+		return (NULL);
+	len = 0;
+	while (buffer[len] != '\0' && buffer[len] != '\n')
+		len++;
+	if (buffer[len] == '\0')
+	{
+		free(buffer);
+		return (NULL);
+	}
+	new = strdup(buffer + len + 1);
+	free(buffer);
+	return (new);
+}
