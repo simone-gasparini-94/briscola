@@ -10,15 +10,15 @@
 
 typedef struct s_player t_player;
 
-typedef enum Suit
+typedef enum e_suit
 {
 	COINS,
 	SWORDS,
 	CUPS,
 	BATONS
-}	e_suit;
+}	t_suit;
 
-typedef enum Rank
+typedef enum e_rank
 {
 	TWO,
 	FOUR,
@@ -30,12 +30,12 @@ typedef enum Rank
 	KING,
 	THREE,
 	ACE
-}	e_rank;
+}	t_rank;
 
 typedef struct s_card
 {
-	e_suit	suit;
-	e_rank	rank;
+	t_suit	suit;
+	t_rank	rank;
 	bool	shuffle;
 }	t_card;
 
