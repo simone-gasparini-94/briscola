@@ -34,6 +34,7 @@ void	play(t_deck *deck, t_player *player1, t_player *player2)
 		play_card(deck, deck->first);
 		play_card(deck, deck->second);
 		check_winner(deck, player1, player2);
+		print_score(player1, player2);
 		print_divider();
 		print_briscola(deck);
 		if (player1->first == true)
@@ -123,7 +124,7 @@ static void	gets_hand(t_deck *deck, t_player *winner, t_player *loser)
 	winner->first = true;
 	loser->first = false;
 	winner->points += deck->values[winner->played.rank];
-	loser->points += deck->values[loser->played.rank];
+	winner->points += deck->values[loser->played.rank];
 	printf("%s TAKES\n\n", winner->name);
 }
 

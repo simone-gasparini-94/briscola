@@ -33,12 +33,8 @@ void	print_briscola(t_deck *deck)
 
 void	print_score(t_player *player1, t_player *player2)
 {
-	if (player1->points > player2->points)
-		printf("%s WON WITH %zu POINTS\n\n", player1->name, player1->points);
-	else if (player2->points > player1->points)
-		printf("%s WON WITH %zu POINTS\n\n", player2->name, player2->points);
-	else
-		printf("DRAW\n\n");
+	printf("%s: %zu\t-\t%s: %zu\n", 
+			player1->name, player1->points, player2->name, player2->points);
 }
 
 void	print_divider(void)
