@@ -1,5 +1,5 @@
 CC      = gcc
-CFLAGS  = -Wall -Wextra -Werror -Iinc -I/opt/homebrew/include
+CFLAGS  = -Wall -Wextra -Werror -Iinc/logic -Iinc/graphics  -I/opt/homebrew/include
 LDFLAGS = -L/opt/homebrew/lib -lraylib -framework OpenGL -framework Cocoa -framework IOKit
 
 BIN     = briscola
@@ -13,7 +13,8 @@ SRCS    = src/main.c							\
 		  src/logic/play.c						\
 		  src/logic/player.c					\
 		  src/logic/print.c						\
-		  src/logic/set_up.c					
+		  src/logic/set_up.c					\
+		  src/graphics/graphics_data.c		
 
 OBJS    = $(SRCS:src/%.c=$(OBJ_DIR)/%.o)
 

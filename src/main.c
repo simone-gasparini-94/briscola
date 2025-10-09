@@ -1,29 +1,33 @@
 #include <stdio.h>
 #include "data.h"
 #include "deck.h"
+#include "graphics.h"
 #include "play.h"
 #include "player.h"
 #include "print.h"
 #include "raylib.h"
 
-#define RAYLIB 0
-#define CLI 1
+#define RAYLIB 1
+#define CLI 0
 
 int	main(void)
 {
 	t_data *data;
+	t_graph *graph_data;
 
 	data = create_data();
 	#if RAYLIB
+	graph_data = create_graph_data();
 	InitWindow(800, 450, "briscola");
 	SetTargetFPS(60);
 	while (!WindowShouldClose())
 	{
 		BeginDrawing();
-			ClearBackground(RAYWHITE);
-			DrawText("Briscola", 190, 200, 20, LIGHTGRAY);
+			ClearBackground(DARKBROWN);
+			DrawText("Briscola", 400, 225, 20, LIGHTGRAY);
 		EndDrawing();
 	}
+	destroy_graph_data(graph_data);
 	CloseWindow();
 	#endif
 	#if CLI
