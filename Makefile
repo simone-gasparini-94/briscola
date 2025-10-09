@@ -15,7 +15,8 @@ SRCS    = src/main.c							\
 		  src/logic/print.c						\
 		  src/logic/set_up.c					\
 		  src/graphics/graphics_data.c			\
-		  src/graphics/init.c		
+		  src/graphics/init.c					\
+		  src/graphics/load_screen.c			
 
 OBJS    = $(SRCS:src/%.c=$(OBJ_DIR)/%.o)
 
