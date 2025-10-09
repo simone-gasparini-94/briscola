@@ -13,7 +13,7 @@
 int	main(void)
 {
 	t_data *data;
-	t_graph *graph_data;
+	t_grph *graph_data;
 
 	data = create_data();
 	#if RAYLIB
