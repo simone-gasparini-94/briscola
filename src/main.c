@@ -3,6 +3,7 @@
 #include "play.h"
 #include "player.h"
 #include "print.h"
+#include "raylib.h"
 
 int	main(void)
 {

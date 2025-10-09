@@ -1,23 +1,29 @@
 CC      = gcc
 CFLAGS  = -Wall -Wextra -Werror -Iinc -I/opt/homebrew/include
 LDFLAGS = -L/opt/homebrew/lib -lraylib -framework OpenGL -framework Cocoa -framework IOKit
-SRC_DIR = src
-OBJ_DIR = obj
-BIN     = briscola
 
-SRCS    = $(wildcard $(SRC_DIR)/*.c)
-OBJS    = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
+BIN     = briscola
+OBJ_DIR = obj
+
+SRCS    = src/main.c							\
+		  src/logic/computer.c					\
+		  src/logic/deck.c						\
+		  src/logic/get_input.c					\
+		  src/logic/play.c						\
+		  src/logic/player.c					\
+		  src/logic/print.c						\
+		  src/logic/set_up.c					
+
+OBJS    = $(SRCS:src/%.c=$(OBJ_DIR)/%.o)
 
 all: $(BIN)
 
 $(BIN): $(OBJS)
-	@$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
+	@$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: src/%.c
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
-
-$(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
 
 clean:
 	@rm -rf $(OBJ_DIR)
