@@ -18,17 +18,8 @@ int	main(void)
 	data = create_data();
 	#if RAYLIB
 	graph_data = create_graph_data();
-	InitWindow(800, 450, "briscola");
-	SetTargetFPS(60);
-	while (!WindowShouldClose())
-	{
-		BeginDrawing();
-			ClearBackground(DARKBROWN);
-			DrawText("Briscola", 400, 225, 20, LIGHTGRAY);
-		EndDrawing();
-	}
+	init(data, graph_data);
 	destroy_graph_data(graph_data);
-	CloseWindow();
 	#endif
 	#if CLI
 	play(data->deck, data->player1, data->player2);
