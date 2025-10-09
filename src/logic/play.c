@@ -66,11 +66,15 @@ void	play(t_deck *deck, t_player *player1, t_player *player2)
 			deck->first = player2;
 			deck->second = player1;
 		}
+		print_score(player1, player2);
 		print_divider();
-		print_briscola(deck);
 		deck->first->hand = update_hand(deck->first);	
 		deck->second->hand = update_hand(deck->second);
-		print_hand(deck, player1);
+		if (player1->hand_size > 0)
+		{
+			print_briscola(deck);
+			print_hand(deck, player1);
+		}
 	}
 }
 
@@ -135,9 +139,12 @@ static t_card *update_hand(t_player *player)
 	size_t	j;
 
 	player->hand_size--;
-	new_hand = malloc(sizeof(t_card) * player->hand_size);
-	if (new_hand == NULL)
-		return (NULL);
+	if (player->hand_size > 0)
+	{
+		new_hand = malloc(sizeof(t_card) * player->hand_size);
+		if (new_hand == NULL)
+			return (NULL);
+	}
 	i = 0;
 	j = 0;
 	while (i < player->hand_size + 1)

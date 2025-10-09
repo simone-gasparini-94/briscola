@@ -33,7 +33,7 @@ void	print_briscola(t_deck *deck)
 
 void	print_score(t_player *player1, t_player *player2)
 {
-	printf("%s: %zu\t-\t%s: %zu\n", 
+	printf("%s: %zu\t-\t%s: %zu\n\n", 
 			player1->name, player1->points, player2->name, player2->points);
 }
 
