@@ -7,6 +7,7 @@ OBJ_DIR = obj
 
 SRCS    = src/main.c							\
 		  src/logic/computer.c					\
+		  src/logic/data.c						\
 		  src/logic/deck.c						\
 		  src/logic/get_input.c					\
 		  src/logic/play.c						\

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "data.h"
 #include "deck.h"
 #include "play.h"
 #include "player.h"
@@ -7,15 +8,11 @@
 
 int	main(void)
 {
-	t_deck *deck;
-	t_player *player1;
-	t_player *player2;
-	
-	player1 = player_create("PLAYER1");
-	player2 = player_create("PLAYER2");
-	deck = deck_create(player1, player2);
-	deck_shuffle(deck);
-	play(deck, player1, player2);
-	print_score(player1, player2);
+	t_data *data;
+
+	data = create_data();
+	play(data->deck, data->player1, data->player2);
+	print_score(data->player1, data->player2);
+	destroy_data(data);
 	return (0);
 }
