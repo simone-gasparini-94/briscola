@@ -28,6 +28,13 @@ typedef struct s_grph
 {
 	t_wndw	window;	
 	t_btn	play_btn;
+	Color	white;
+	Color	yellow;
+	Color	orange;
+	Color	red;
+	Color	blue;
+	Color	black;
+	Font	font;
 }	t_grph;
 
 t_grph *create_graph_data(void);
