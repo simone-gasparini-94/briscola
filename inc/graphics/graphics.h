@@ -6,6 +6,12 @@
 
 typedef struct s_data	t_data;
 
+typedef enum e_screen
+{
+	LOAD_SCREEN,
+	PLAY_SCREEN
+}	t_screen;
+
 typedef struct s_wndw
 {
 	size_t	width;
@@ -39,8 +45,8 @@ typedef struct s_grph
 
 t_grph *create_graph_data(void);
 void	destroy_graph_data(t_grph *graph_data);
-void	draw_load_screen(t_grph *graph_data);
 void	init(t_data *data, t_grph *graph_data);
+void	draw_load_screen(t_grph *graph_data);
 bool	is_play_btn_clicked(t_btn play_btn);
-
+void	draw_play_screen(t_grph *graph_data);
 #endif

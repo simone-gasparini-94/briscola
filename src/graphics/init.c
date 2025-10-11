@@ -8,6 +8,9 @@ static void	init_font(t_grph *graph_data);
 
 void	init(t_data *data, t_grph *graph_data)
 {
+	t_screen screen;
+
+	screen = LOAD_SCREEN;
 	(void)data;
 	init_window(&(graph_data->window));
 	InitWindow(graph_data->window.width, graph_data->window.height, "briscola");
@@ -17,9 +20,14 @@ void	init(t_data *data, t_grph *graph_data)
 	while (!WindowShouldClose())
 	{
 		BeginDrawing();
+		if (screen == LOAD_SCREEN)
+		{
 			draw_load_screen(graph_data);
 			if (is_play_btn_clicked(graph_data->play_btn) == true)
-				break ;
+				screen = PLAY_SCREEN;
+		}
+		else if (screen == PLAY_SCREEN)
+			draw_play_screen(graph_data);
 		EndDrawing();
 	}
 	CloseWindow();
