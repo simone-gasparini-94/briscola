@@ -44,6 +44,7 @@ typedef struct s_grph
 	Color	blue;
 	Color	black;
 	Font	font;
+	Texture2D background;
 	size_t	margin;
 	size_t	external_padding;
 }	t_grph;

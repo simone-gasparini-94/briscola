@@ -9,6 +9,7 @@
 static void	init_window(t_wndw *window);
 static void	init_colors(t_grph *graph_data);
 static void	init_font(t_grph *graph_data);
+static void	init_background(t_grph *graph_data);
 static void	init_dimensions(t_grph *graph_data);
 static void	init_card_size(t_deck *deck);
 static void	upload_card_img(t_deck *deck);
@@ -23,6 +24,7 @@ void	init(t_data *data, t_grph *graph_data)
 	init_colors(graph_data);
 	init_font(graph_data);
 	init_dimensions(graph_data);
+	init_background(graph_data);
 	init_card_size(data->deck);
 	upload_card_img(data->deck);
 	deck_shuffle(data->deck);
@@ -49,6 +51,12 @@ static void	init_window(t_wndw *window)
 {
 	window->width = 1280;
 	window->height = 720;
+}
+
+static void	init_background(t_grph *graph_data)
+{
+	graph_data->background =
+	LoadTexture("assets/textures/decrepit/decrepit_wallpaper_diff_4k.jpg");
 }
 
 static void	init_colors(t_grph *graph_data)
