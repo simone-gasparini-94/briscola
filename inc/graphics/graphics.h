@@ -5,6 +5,7 @@
 # include "raylib.h"
 
 typedef struct s_data	t_data;
+typedef struct s_card	t_card;
 
 typedef enum e_screen
 {
@@ -30,17 +31,11 @@ typedef struct s_btn
 	Rectangle rectangle;
 }	t_btn;
 
-typedef struct s_crd
-{
-	Rectangle rectangle;
-	t_txt	txt;
-}	t_crd;
 
 typedef struct s_grph
 {
 	t_wndw	window;	
 	t_btn	play_btn;
-	t_crd	card;
 	Color	white;
 	Color	yellow;
 	Color	orange;

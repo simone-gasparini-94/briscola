@@ -13,7 +13,6 @@ t_data *create_data(void)
 	data->player1 = player_create("PLAYER1");
 	data->player2 = player_create("PLAYER2");
 	data->deck = deck_create(data->player1, data->player2);
-	deck_shuffle(data->deck);
 	return (data);
 }
 

@@ -22,6 +22,7 @@ int	main(void)
 	destroy_graph_data(graph_data);
 	#endif
 	#if CLI
+	deck_shuffle(data->deck);
 	play(data->deck, data->player1, data->player2);
 	#endif
 	destroy_data(data);

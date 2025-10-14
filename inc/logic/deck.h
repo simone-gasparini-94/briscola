@@ -3,6 +3,7 @@
 
 # include <stddef.h>
 # include <stdbool.h>
+# include "raylib.h"
 
 # define NUM_CARDS 40
 # define NUM_SUITS 4
@@ -34,6 +35,8 @@ typedef enum e_rank
 
 typedef struct s_card
 {
+	Rectangle rectangle;
+	Texture2D img;
 	t_suit	suit;
 	t_rank	rank;
 	bool	shuffle;

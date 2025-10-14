@@ -33,8 +33,8 @@ t_deck	*deck_create(t_player *player1, t_player *player2)
 static void	array_str_create(t_deck *deck)
 {
 	deck->suits[0] = "COINS";
-	deck->suits[1] = "SWORDS";
-	deck->suits[2] = "CUPS";
+	deck->suits[1] = "CUPS";
+	deck->suits[2] = "SWORDS";
 	deck->suits[3] = "BATONS";
 	deck->ranks[0] = "TWO";
 	deck->ranks[1] = "FOUR";

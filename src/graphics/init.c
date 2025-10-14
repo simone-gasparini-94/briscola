@@ -1,24 +1,30 @@
 #include "data.h"
+#include "deck.h"
 #include "graphics.h"
 #include "raylib.h"
 #include "set_up.h"
+#include <stdio.h>
 
 static void	init_window(t_wndw *window);
 static void	init_colors(t_grph *graph_data);
 static void	init_font(t_grph *graph_data);
-static void	init_card_size(t_grph *graph_data);
+static void	init_card_size(t_deck *deck);
+static void	upload_card_img(t_deck *deck);
 
 void	init(t_data *data, t_grph *graph_data)
 {
 	t_screen screen;
 
 	screen = LOAD_SCREEN;
-	set_up(data->deck, data->player1, data->player2);
 	init_window(&(graph_data->window));
 	InitWindow(graph_data->window.width, graph_data->window.height, "briscola");
 	init_colors(graph_data);
 	init_font(graph_data);
-	init_card_size(graph_data);
+	init_card_size(data->deck);
+	upload_card_img(data->deck);
+	deck_shuffle(data->deck);
+	set_up(data->deck, data->player1, data->player2);
+	SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
 	SetTargetFPS(60);
 	while (!WindowShouldClose())
 	{
@@ -38,8 +44,8 @@ void	init(t_data *data, t_grph *graph_data)
 
 static void	init_window(t_wndw *window)
 {
-	window->width = 640;
-	window->height = 480;
+	window->width = 1280;
+	window->height = 720;
 }
 
 static void	init_colors(t_grph *graph_data)
@@ -57,8 +63,29 @@ static void	init_font(t_grph *graph_data)
 	graph_data->font = LoadFontEx("assets/typeface/deutsch_gothic/Deutsch.ttf", 120, 0, 0);
 }
 
-static void	init_card_size(t_grph *graph_data)
+static void	init_card_size(t_deck *deck)
 {
-	graph_data->card.rectangle.width = 50;
-	graph_data->card.rectangle.height = 100;
+	size_t	i;
+
+	i = 0;
+	while (i < deck->size)
+	{
+		deck->cards[i].rectangle.width = 102;
+		deck->cards[i].rectangle.height = 164;
+		i++;
+	}
+}
+
+static void	upload_card_img(t_deck *deck)
+{
+	char	path[64];
+	size_t	i;
+
+	i = 1;
+	while (i <= deck->size)
+	{
+		snprintf(path, sizeof(path), "assets/images/%zu.jpg", i);
+		deck->cards[i].img = LoadTexture(path);
+		i++;
+	}
 }
