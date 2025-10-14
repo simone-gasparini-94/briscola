@@ -14,15 +14,6 @@ void	draw_load_screen(t_grph *graph_data)
 	draw_window_border(graph_data, &(graph_data->window));
 }
 
-bool	is_play_btn_clicked(t_btn play_btn)
-{
-	Vector2 mouse;
-
-	mouse = GetMousePosition();
-	return (CheckCollisionPointRec(mouse, play_btn.rectangle) == true &&
-			IsMouseButtonPressed(MOUSE_BUTTON_LEFT) == true);
-}
-
 static void	draw_header(t_grph *graph_data, t_wndw *window)
 {
 	t_txt	header;

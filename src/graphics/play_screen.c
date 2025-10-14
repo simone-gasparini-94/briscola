@@ -2,6 +2,7 @@
 #include "deck.h"
 #include "player.h"
 #include "graphics.h"
+#include "interaction.h"
 #include "raylib.h"
 #include "set_up.h"
 
@@ -9,7 +10,7 @@ static void draw_hand(t_data *data, t_player *player, t_grph *graph_data);
 
 void	draw_play_screen(t_data *data, t_grph *graph_data)
 {
-	ClearBackground(graph_data->white);	
+	ClearBackground(graph_data->white);
 	draw_hand(data, data->player1, graph_data);
 }
 
@@ -32,8 +33,10 @@ static void draw_hand(t_data *data, t_player *player, t_grph *graph_data)
 	{
 		card.rectangle.x = ((graph_data->window.width - hand_width) / 2)
 			+ ((card.rectangle.width + margin) * i);
-		card.rectangle.y = graph_data->window.height - ((hand_height / 4) * 3);
+		card.rectangle.y = graph_data->window.height - (hand_height + margin);
 		card.img = data->deck->cards[i].img;
+		if (is_mouse_hover(card.rectangle) == true)
+			card.rectangle.y -= margin;
 		DrawRectangleRounded(card.rectangle, 0.1f, 12, graph_data->white);
 		DrawTexturePro(card.img,
 						(Rectangle){0, 0, card.img.width, card.img.height},

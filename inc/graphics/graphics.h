@@ -49,6 +49,5 @@ t_grph *create_graph_data(void);
 void	destroy_graph_data(t_grph *graph_data);
 void	init(t_data *data, t_grph *graph_data);
 void	draw_load_screen(t_grph *graph_data);
-bool	is_play_btn_clicked(t_btn play_btn);
 void	draw_play_screen(t_data *data, t_grph *graph_data);
 #endif

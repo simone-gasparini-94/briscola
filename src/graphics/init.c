@@ -1,6 +1,7 @@
 #include "data.h"
 #include "deck.h"
 #include "graphics.h"
+#include "interaction.h"
 #include "raylib.h"
 #include "set_up.h"
 #include <stdio.h>
@@ -32,7 +33,7 @@ void	init(t_data *data, t_grph *graph_data)
 		if (screen == LOAD_SCREEN)
 		{
 			draw_load_screen(graph_data);
-			if (is_play_btn_clicked(graph_data->play_btn) == true)
+			if (is_btn_clicked(graph_data->play_btn.rectangle) == true)
 				screen = PLAY_SCREEN;
 		}
 		else if (screen == PLAY_SCREEN)
