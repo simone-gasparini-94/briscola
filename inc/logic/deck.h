@@ -50,6 +50,7 @@ typedef struct s_deck
 	t_player	*second;
 	t_card		cards[NUM_CARDS];
 	t_card		briscola;
+	t_card		back;
 	char		*ranks[NUM_RANKS];
 	char		*suits[NUM_SUITS];
 	size_t		values[NUM_RANKS];

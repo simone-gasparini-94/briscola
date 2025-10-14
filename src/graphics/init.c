@@ -67,14 +67,22 @@ static void	init_font(t_grph *graph_data)
 static void	init_card_size(t_deck *deck)
 {
 	size_t	i;
+	size_t	width;
+	size_t	height;
 
+	width = 102;
+	height = 164;
 	i = 0;
 	while (i < deck->size)
 	{
-		deck->cards[i].rectangle.width = 102;
-		deck->cards[i].rectangle.height = 164;
+		deck->cards[i].rectangle.width = width;
+		deck->cards[i].rectangle.height = height;
 		i++;
 	}
+	deck->briscola.rectangle.width = width;
+	deck->briscola.rectangle.height = height;
+	deck->back.rectangle.width = width;
+	deck->back.rectangle.height = height;
 }
 
 static void	upload_card_img(t_deck *deck)
@@ -89,4 +97,5 @@ static void	upload_card_img(t_deck *deck)
 		deck->cards[i].img = LoadTexture(path);
 		i++;
 	}
+	deck->back.img = LoadTexture("assets/images/back.jpg");
 }
