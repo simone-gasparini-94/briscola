@@ -13,10 +13,10 @@
 int	main(void)
 {
 	t_data *data;
-	t_grph *graph_data;
 
 	data = create_data();
 	#if RAYLIB
+	t_grph *graph_data;
 	graph_data = create_graph_data();
 	init(data, graph_data);
 	destroy_graph_data(graph_data);

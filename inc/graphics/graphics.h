@@ -44,6 +44,8 @@ typedef struct s_grph
 	Color	blue;
 	Color	black;
 	Font	font;
+	size_t	margin;
+	size_t	external_padding;
 }	t_grph;
 
 t_grph *create_graph_data(void);
