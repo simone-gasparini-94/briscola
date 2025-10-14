@@ -1,21 +1,24 @@
 #include "data.h"
 #include "graphics.h"
 #include "raylib.h"
+#include "set_up.h"
 
 static void	init_window(t_wndw *window);
 static void	init_colors(t_grph *graph_data);
 static void	init_font(t_grph *graph_data);
+static void	init_card_size(t_grph *graph_data);
 
 void	init(t_data *data, t_grph *graph_data)
 {
 	t_screen screen;
 
 	screen = LOAD_SCREEN;
-	(void)data;
+	set_up(data->deck, data->player1, data->player2);
 	init_window(&(graph_data->window));
 	InitWindow(graph_data->window.width, graph_data->window.height, "briscola");
 	init_colors(graph_data);
 	init_font(graph_data);
+	init_card_size(graph_data);
 	SetTargetFPS(60);
 	while (!WindowShouldClose())
 	{
@@ -27,7 +30,7 @@ void	init(t_data *data, t_grph *graph_data)
 				screen = PLAY_SCREEN;
 		}
 		else if (screen == PLAY_SCREEN)
-			draw_play_screen(graph_data);
+			draw_play_screen(data, graph_data);
 		EndDrawing();
 	}
 	CloseWindow();
@@ -52,4 +55,10 @@ static void	init_colors(t_grph *graph_data)
 static void	init_font(t_grph *graph_data)
 {
 	graph_data->font = LoadFontEx("assets/typeface/deutsch_gothic/Deutsch.ttf", 120, 0, 0);
+}
+
+static void	init_card_size(t_grph *graph_data)
+{
+	graph_data->card.rectangle.width = 50;
+	graph_data->card.rectangle.height = 100;
 }

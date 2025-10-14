@@ -30,10 +30,17 @@ typedef struct s_btn
 	Rectangle rectangle;
 }	t_btn;
 
+typedef struct s_crd
+{
+	Rectangle rectangle;
+	t_txt	txt;
+}	t_crd;
+
 typedef struct s_grph
 {
 	t_wndw	window;	
 	t_btn	play_btn;
+	t_crd	card;
 	Color	white;
 	Color	yellow;
 	Color	orange;
@@ -48,5 +55,5 @@ void	destroy_graph_data(t_grph *graph_data);
 void	init(t_data *data, t_grph *graph_data);
 void	draw_load_screen(t_grph *graph_data);
 bool	is_play_btn_clicked(t_btn play_btn);
-void	draw_play_screen(t_grph *graph_data);
+void	draw_play_screen(t_data *data, t_grph *graph_data);
 #endif
