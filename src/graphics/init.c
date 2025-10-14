@@ -9,7 +9,7 @@
 static void	init_window(t_wndw *window);
 static void	init_colors(t_grph *graph_data);
 static void	init_font(t_grph *graph_data);
-static void	init_background(t_grph *graph_data);
+static void	init_images(t_grph *graph_data);
 static void	init_dimensions(t_grph *graph_data);
 static void	init_card_size(t_deck *deck);
 static void	upload_card_img(t_deck *deck);
@@ -24,7 +24,7 @@ void	init(t_data *data, t_grph *graph_data)
 	init_colors(graph_data);
 	init_font(graph_data);
 	init_dimensions(graph_data);
-	init_background(graph_data);
+	init_images(graph_data);
 	init_card_size(data->deck);
 	upload_card_img(data->deck);
 	deck_shuffle(data->deck);
@@ -53,16 +53,18 @@ static void	init_window(t_wndw *window)
 	window->height = 720;
 }
 
-static void	init_background(t_grph *graph_data)
+static void	init_images(t_grph *graph_data)
 {
 	graph_data->background =
-	LoadTexture("assets/textures/wood_table_worn/wood_table_worn_diff_4k.jpg");
+		LoadTexture("assets/textures/wood_table_worn/wood_table_worn_diff_4k.jpg");
+	graph_data->coin =
+		LoadTexture("assets/images/denari.png");
 }
 
 static void	init_colors(t_grph *graph_data)
 {
 	graph_data->white = (Color){247, 247, 235, 255};
-	graph_data->yellow = (Color){220, 191, 0, 255};
+	graph_data->yellow = (Color){246, 246, 0, 255};
 	graph_data->orange = (Color){224, 140, 0, 255};
 	graph_data->red = (Color){214, 0, 13, 255};
 	graph_data->blue = (Color){0, 60, 133, 255};
