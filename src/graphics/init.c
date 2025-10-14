@@ -56,7 +56,7 @@ static void	init_window(t_wndw *window)
 static void	init_background(t_grph *graph_data)
 {
 	graph_data->background =
-	LoadTexture("assets/textures/decrepit/decrepit_wallpaper_diff_4k.jpg");
+	LoadTexture("assets/textures/wood_table_worn/wood_table_worn_diff_4k.jpg");
 }
 
 static void	init_colors(t_grph *graph_data)

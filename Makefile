@@ -14,7 +14,7 @@ SRCS    = src/main.c							\
 		  src/logic/player.c					\
 		  src/logic/print.c						\
 		  src/logic/set_up.c					\
-		  src/graphics/border.c					\
+		  src/graphics/background.c				\
 		  src/graphics/graphics_data.c			\
 		  src/graphics/init.c					\
 		  src/graphics/interaction.c			\

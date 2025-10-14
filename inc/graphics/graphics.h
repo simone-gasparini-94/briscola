@@ -52,8 +52,8 @@ typedef struct s_grph
 t_grph *create_graph_data(void);
 void	destroy_graph_data(t_grph *graph_data);
 void	init(t_data *data, t_grph *graph_data);
+void	draw_background(t_grph *graph_data);
 void	draw_load_screen(t_grph *graph_data);
 void	draw_play_screen(t_data *data, t_grph *graph_data);
-void	draw_window_border(t_grph *graph_data, t_wndw *window);
 
 #endif

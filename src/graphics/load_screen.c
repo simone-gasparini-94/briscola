@@ -10,7 +10,6 @@ void	draw_load_screen(t_grph *graph_data)
 	ClearBackground(graph_data->white);
 	draw_header(graph_data, &(graph_data->window));
 	draw_button(graph_data, &(graph_data->play_btn), &(graph_data->window));
-	draw_window_border(graph_data, &(graph_data->window));
 }
 
 static void	draw_header(t_grph *graph_data, t_wndw *window)
@@ -18,7 +17,7 @@ static void	draw_header(t_grph *graph_data, t_wndw *window)
 	t_txt	header;
 
 	header.s = "Briscola";
-	header.font_size = 64;
+	header.font_size = 80;
 	DrawTextEx(graph_data->font, header.s,
 			(Vector2)
 			{
@@ -38,9 +37,7 @@ static void	draw_button(t_grph *graph_data, t_btn *play_btn, t_wndw *window)
 	play_btn->rectangle.x = (window->width - play_btn->rectangle.width) / 2;
 	play_btn->rectangle.y = ((window->height - play_btn->rectangle.height) / 5) * 3; 
 	DrawRectangle(play_btn->rectangle.x, play_btn->rectangle.y,
-			play_btn->rectangle.width, play_btn->rectangle.height, graph_data->orange);
-	DrawRectangleLinesEx(play_btn->rectangle, 10, graph_data->black);
-	DrawRectangleLinesEx(play_btn->rectangle, 8, graph_data->red);
+			play_btn->rectangle.width, play_btn->rectangle.height, graph_data->yellow);
 	DrawRectangleLinesEx(play_btn->rectangle, 2, graph_data->black);
 	DrawTextEx(graph_data->font, play_btn->txt.s,
 			(Vector2)

@@ -6,7 +6,6 @@
 #include "raylib.h"
 #include "set_up.h"
 
-static void draw_background(t_grph *graph_data);
 static void draw_hand(t_data *data, t_player *player, t_grph *graph_data);
 static void	draw_card(t_card card, t_grph *graph_data);
 static void draw_briscola(t_deck *deck, t_grph *graph_data);
@@ -16,15 +15,9 @@ void	draw_play_screen(t_data *data, t_grph *graph_data)
 {
 	ClearBackground(graph_data->white);
 	draw_background(graph_data);
-	draw_window_border(graph_data, &(graph_data->window));
 	draw_hand(data, data->player1, graph_data);
 	draw_briscola(data->deck, graph_data);
 	draw_deck(data->deck, graph_data);
-}
-
-static void draw_background(t_grph *graph_data)
-{
-	DrawTexture(graph_data->background, 0, 0, ColorAlpha(graph_data->white, 0.1f));
 }
 
 static void draw_hand(t_data *data, t_player *player, t_grph *graph_data)
