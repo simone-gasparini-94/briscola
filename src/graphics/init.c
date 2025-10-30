@@ -108,10 +108,10 @@ static void	upload_card_img(t_deck *deck)
 	char	path[64];
 	size_t	i;
 
-	i = 1;
-	while (i <= deck->size)
+	i = 0;
+	while (i < deck->size)
 	{
-		snprintf(path, sizeof(path), "assets/images/%zu.jpg", i);
+		snprintf(path, sizeof(path), "assets/images/%zu.jpg", i + 1);
 		deck->cards[i].img = LoadTexture(path);
 		i++;
 	}
