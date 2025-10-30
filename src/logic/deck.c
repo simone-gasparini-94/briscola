@@ -69,10 +69,10 @@ void	deck_shuffle(t_deck *deck)
 	size_t	random_value;
 
 	srand(time(NULL));
-	random_value = rand() % NUM_CARDS;
 	i = 0;
 	while (i < deck->size)
 	{
+		random_value = rand() % NUM_CARDS;
 		while (deck->cards[random_value].shuffle == true)
 			random_value = rand() % NUM_CARDS;
 		deck_shuffle[i] = deck->cards[random_value];

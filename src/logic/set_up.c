@@ -56,6 +56,11 @@ static void draw_initial(t_deck *deck, t_player *player1, t_player *player2)
 	while (i < 3)
 	{
 		draw(player1, deck, i);
+		i++;
+	}
+	i = 0;
+	while (i < 3)
+	{
 		draw(player2, deck, i);
 		i++;
 	}
