@@ -7,6 +7,7 @@
 #include "set_up.h"
 
 static void draw_hand(t_data *data, t_player *player, t_grph *graph_data);
+static void draw_opponent_hand(t_data *data, t_player *player, t_grph *graph_data);
 static void	draw_card(t_card card, t_grph *graph_data);
 static void draw_briscola(t_deck *deck, t_grph *graph_data);
 static void draw_deck(t_deck *deck, t_grph *graph_data);
@@ -17,6 +18,7 @@ void	draw_play_screen(t_data *data, t_grph *graph_data)
 	ClearBackground(graph_data->white);
 	draw_background(graph_data);
 	draw_hand(data, data->player1, graph_data);
+	draw_opponent_hand(data, data->player2, graph_data);
 	draw_briscola(data->deck, graph_data);
 	draw_deck(data->deck, graph_data);
 	draw_played(data->player1, data->player2, graph_data);
@@ -40,7 +42,7 @@ static void draw_hand(t_data *data, t_player *player, t_grph *graph_data)
 		card.rectangle.x = ((graph_data->window.width - hand_width) / 2)
 			+ ((card.rectangle.width + graph_data->margin) * i);
 		card.rectangle.y = graph_data->window.height
-			- (hand_height + graph_data->margin + graph_data->window.border);
+			- hand_height - graph_data->margin;
 		card.img = data->deck->cards[i].img;
 		if (is_mouse_hover(card.rectangle) == true)
 			card.rectangle.y -= graph_data->margin;
@@ -49,6 +51,28 @@ static void draw_hand(t_data *data, t_player *player, t_grph *graph_data)
 	}
 }
 
+static void draw_opponent_hand(t_data *data, t_player *player, t_grph *graph_data)
+{
+	t_card	card;
+	size_t	i;
+	size_t	hand_width;
+
+	card.rectangle.width = data->deck->cards[0].rectangle.width;
+	card.rectangle.height = data->deck->cards[0].rectangle.height;
+	hand_width = (card.rectangle.width * player->hand_size)
+		+ (graph_data->margin * (player->hand_size - 1));
+	i = 0;
+	while (i < player->hand_size)
+	{
+		card.rectangle.x = ((graph_data->window.width - hand_width) / 2)
+			+ ((card.rectangle.width + graph_data->margin) * i);
+		card.rectangle.y = graph_data->margin;
+		card.img = data->deck->back.img;
+		draw_card(card, graph_data);
+		i++;
+	}
+	
+}
 static void	draw_card(t_card card, t_grph *graph_data)
 {
 	DrawRectangleRounded(card.rectangle, 0.1f, 12, graph_data->white);
@@ -93,10 +117,10 @@ static void draw_deck(t_deck *deck, t_grph *graph_data)
 
 static void draw_played(t_player *player1, t_player *player2, t_grph *graph_data)
 {
-	player1->played.rectangle.x = (graph_data->window.width - player1->played.rectangle.width) / 2 - 80;
+	player1->played.rectangle.x = (graph_data->window.width - player1->played.rectangle.width) / 2 - 60;
 	player1->played.rectangle.y = (graph_data->window.height - player1->played.rectangle.height) / 2;
 	draw_card(player1->played, graph_data);
-	player2->played.rectangle.x = (graph_data->window.width - player2->played.rectangle.width) / 2 + 80;
+	player2->played.rectangle.x = (graph_data->window.width - player2->played.rectangle.width) / 2 + 60;
 	player2->played.rectangle.y = (graph_data->window.height - player2->played.rectangle.height) / 2;
 	draw_card(player2->played, graph_data);
 }
