@@ -10,6 +10,7 @@ static void draw_hand(t_data *data, t_player *player, t_grph *graph_data);
 static void	draw_card(t_card card, t_grph *graph_data);
 static void draw_briscola(t_deck *deck, t_grph *graph_data);
 static void draw_deck(t_deck *deck, t_grph *graph_data);
+static void draw_played(t_player *player1, t_player *player2, t_grph *graph_data);
 
 void	draw_play_screen(t_data *data, t_grph *graph_data)
 {
@@ -18,6 +19,7 @@ void	draw_play_screen(t_data *data, t_grph *graph_data)
 	draw_hand(data, data->player1, graph_data);
 	draw_briscola(data->deck, graph_data);
 	draw_deck(data->deck, graph_data);
+	draw_played(data->player1, data->player2, graph_data);
 }
 
 static void draw_hand(t_data *data, t_player *player, t_grph *graph_data)
@@ -81,10 +83,20 @@ static void draw_deck(t_deck *deck, t_grph *graph_data)
 	while (i < deck->size - deck->counter - 1)
 	{
 		deck->back.rectangle.x = graph_data->external_padding + graph_data->window.border - z;
-		deck->back.rectangle.y = (graph_data->window.height - deck->briscola.rectangle.height) / 2 - z;
+		deck->back.rectangle.y =
+			(graph_data->window.height - deck->briscola.rectangle.height) / 2 - z;
 		draw_card(deck->back, graph_data);
 		i++;
 		z += 0.2f;
 	}
 }
 
+static void draw_played(t_player *player1, t_player *player2, t_grph *graph_data)
+{
+	player1->played.rectangle.x = (graph_data->window.width - player1->played.rectangle.width) / 2 - 80;
+	player1->played.rectangle.y = (graph_data->window.height - player1->played.rectangle.height) / 2;
+	draw_card(player1->played, graph_data);
+	player2->played.rectangle.x = (graph_data->window.width - player2->played.rectangle.width) / 2 + 80;
+	player2->played.rectangle.y = (graph_data->window.height - player2->played.rectangle.height) / 2;
+	draw_card(player2->played, graph_data);
+}
