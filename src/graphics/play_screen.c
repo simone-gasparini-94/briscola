@@ -46,6 +46,8 @@ static void draw_hand(t_data *data, t_player *player, t_grph *graph_data)
 		card.img = data->deck->cards[i].img;
 		if (is_mouse_hover(card.rectangle) == true)
 			card.rectangle.y -= graph_data->margin;
+		if (is_btn_clicked(card.rectangle) == true)
+			player->played = card;
 		draw_card(card, graph_data);
 		i++;
 	}

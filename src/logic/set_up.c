@@ -14,8 +14,6 @@ void	set_up(t_deck *deck, t_player *player1, t_player *player2)
 	pick_dealer(player1, player2);
 	turn_briscola(deck);
 	draw_initial(deck, player1, player2);
-	player1->played = deck->cards[10];
-	player2->played = deck->cards[25];
 }
 
 static void	pick_dealer(t_player *player1, t_player *player2)
